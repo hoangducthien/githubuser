@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">github_user</string>
+    <string name="home_title">Github Users</string>
+    <string name="action_back">Back</string>
+    <string name="follower">Follower</string>
+    <string name="following">Following</string>
+    <string name="user_avatar">user avatar</string>
+    <string name="blog">Blog</string>
+    <string name="user_details">User Details</string>
+    <string name="network_error">Failed to load latest data, please check your internet connection</string>
+    <string name="something_went_wrong">Something went wrong, failed to load latest data, please try again later</string>
+
+</resources>
