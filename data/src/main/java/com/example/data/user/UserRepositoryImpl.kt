@@ -19,8 +19,8 @@ class UserRepositoryImpl(
 ) : UserRepository {
 
 
-    // Use SupervisorJob to avoid exception in API call interrupt send cache data
-    // Use channelFlow for concurrent emission
+    // 1. Get data from DB, if not empty, return cached data
+    // 2. Fetch data from API, if success, save data to db and return latest data again
     override suspend fun getUserList(perPage: Int, since: Int): Flow<WrapperResponse<List<User>>> =
         channelFlow {
             send(executeWrapperAPICall {
@@ -42,7 +42,8 @@ class UserRepositoryImpl(
             }
         }.flowOn(ioDispatcher)
 
-
+    // 1. Get data from DB, return cached data
+    // 2. Fetch data from API, if success, save data to db and return latest data again
     override suspend fun getUserDetail(userName: String): Flow<WrapperResponse<UserDetail>> {
         return channelFlow {
             send(executeWrapperAPICall {

@@ -36,6 +36,7 @@ class UserListViewModel @Inject constructor(private val userListUseCase: GetUser
         getListUser()
     }
 
+    // after successful fetch data, since will be set to last user id returned
     private fun getListUser() {
         viewModelScope.launch(coroutineExceptionHandler) {
             userListUseCase(DATA_PER_PAGE, since)
@@ -53,7 +54,7 @@ class UserListViewModel @Inject constructor(private val userListUseCase: GetUser
         }
     }
 
-
+    // load next page if has more data and state is not loading
     fun loadMore() {
         if (!isLoadingMore.value && hasMore && uiStateFlow.value == STATE_NORMAL) {
             _isLoadingMore.value = true
